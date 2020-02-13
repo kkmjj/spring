@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+<context:component-scan base-package="polymorphism"></context:component-scan>
+
+<!-- 어노테이션 기법  context namespaces 추가 --> <!--context:annotation 은 xml에 객체는 만들어줘야함 여기 안에 객체르 ㄹ어노테이션으로 쓰겠다 -->
+
+
+<!--context:component 는 해당 패키지 안에서 어노테이션을 쓰겠다 xml에 에서 객체 생성 조차도 없이 java 코드에서component를 찾아 사용  -->
+
+
+
+
+
+
+<!-- namespaces에서 p 태그 추가 -->
+
+<!-- 객체 생성  scope 싱글톤 : main에서 객체를 한번만 생성해서 사용 메모리 절약 -->
+<!-- samsungTv(sonny) 라는 객체를 만듬 -->
+<!-- sonny 와 apple이 speaker interface를  갖고 있는데 둘중에 결합을 ref 값을 변경으로 main에서 적용되어 결합됨 -->
+<!--setter는 property로 사용 name 값이 setPrice을 set을 지우고 price로 지정 해서 사용  -->
+
+<!-- 
+ <bean id="tv" class="polymorphism.SamsungTV" scope="singleton" p:price="1000">	
+	
+	  <constructor-arg ref="sony"> </constructor-arg>	
+	
+	<constructor-arg value="270000"></constructor-arg>
+
+	
+	 <property name="price" value="99000000"></property> 
+</bean>
+
+
+<bean id="sony" class="polymorphism.SonySpeaker"></bean>
+
+<bean id="apple" class="polymorphism.AppleSpeaker"></bean>
+
+ -->
+
+
+
+ 
+
+</beans>

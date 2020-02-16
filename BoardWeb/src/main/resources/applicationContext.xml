@@ -4,11 +4,64 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-<context:component-scan base-package="polymorphism"></context:component-scan>
+<!-- database 설정 jdbc template 사용시  driverClassName은 java에서 class.forName 들어갈 값을 value에 넣는다.
+현재 방식은 두번째 방식만 진행해보기위해서 jdbctemplate 객체를 만들고 그 객체에 dataSource를 주입 시켜 놓는다.
+-->
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+	<property name="username" value="test"></property>
+	<property name="password" value="test"></property>
+</bean>
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="dataSource" ref="dataSource"></property>
+
+</bean>
+
+
+
+
+<!-- aop에서의 어노테이션시 필요한 태그  이제부터는 aop를 어노테이션 사용가능-->
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+<!-- DI에서의 어노테이션시 필요한 태그 해당 패키기내에 어노테이션 사용 가능 -->
+ <context:component-scan base-package="com.springbook.biz"></context:component-scan>
+ 
+ 
+ <!-- AOP에서 사용할 공통로직 중요로직이 아닌 객체 생성 
+ <bean id="log" class="com.springbook.biz.common.LogAdvice"> </bean> 
+ <bean id="before" class="com.springbook.biz.common.BeforeAdvice"></bean>
+ <bean id="afterReturning" class="com.springbook.biz.common.AfterReturningAdvice"></bean>
+ <bean id="afterthrow" class="com.springbook.biz.common.AfterThrowingAdvice"></bean>
+  <bean id="around" class="com.springbook.biz.common.AroundAdvice"></bean> -->
+ 
+<!-- pointcut : 해당 expression 을 지정 (조인트 포인트 중에서 지정된 것을 pointcut이라고 함) -->
+<!-- 원하는 pointcut 중에서 aspect가 골라서 참조하는(중요로직)에 결합시킨다. method를 통해서 결합후 사용할 함수 를 방식에 맞게 실행한다. -->
+<!--Jointpoint 사용시 after-returning 은 returning="매개변수" 추가 / after-throwing은  throwing ="예외변수" 추가  -->
+
+<!-- AOP XML로 하기 
+<aop:config>
+	<aop:pointcut id="allPointCut" expression="execution(* com.springbook.biz..*Impl.*(..))" />
+	<aop:pointcut id="getPointCut" expression="execution(* com.springbook.biz..*Impl.get*(..))" />
+	
+	
+	<aop:aspect ref="around">
+		<aop:around method="aroundLog" pointcut-ref="allPointCut" />
+	</aop:aspect>
+
+</aop:config> -->
+
+
+
+<!--  <context:component-scan base-package="polymorphism"></context:component-scan>-->
+
+
 
 <!-- 어노테이션 기법  context namespaces 추가 --> <!--context:annotation 은 xml에 객체는 만들어줘야함 여기 안에 객체르 ㄹ어노테이션으로 쓰겠다 -->
 

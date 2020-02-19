@@ -1,35 +1,32 @@
 package com.springbook.view.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springbook.biz.user.UserVO;
 import com.springbook.biz.user.impl.UserDAO;
 
-public class LoginController implements Controller {
 
-	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+@Controller
+public class LoginController {// implements Controller
 
-
-		UserVO vo = new UserVO(); // USERDTO¿Í µ¿ÀÏ
-		vo.setId(id);
-		vo.setPassword(password);
-
-
-		UserDAO userDAO = new UserDAO();
+	@RequestMapping("/login.do")
+	public String login(UserVO vo, UserDAO userDAO, HttpSession session)  {//handleRequest(HttpServletRequest request, HttpServletResponse response)
 		UserVO user = userDAO.getUser(vo);
-
+		
 		if(user!=null)
 		{
+			session.setAttribute("userName", user.getName());
 			return "getBoardList.do";
 			
 		}else
 		{
-			return "login";
+			return "login.jsp";
 		}
+		
+	
 	}
 
 }

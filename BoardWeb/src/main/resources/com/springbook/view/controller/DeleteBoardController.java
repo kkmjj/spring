@@ -11,10 +11,10 @@ import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 
 
-@Controller
+//@Controller
 public class DeleteBoardController  {//implements Controller
 
-	@RequestMapping("/deleteBoard.do")
+	//@RequestMapping("/deleteBoard.do")
 	public String deleteBoard(BoardVO vo,BoardDAO boardDAO){// handleRequest(HttpServletRequest request, HttpServletResponse response) 
 		
 		boardDAO.deleteBoard(vo);

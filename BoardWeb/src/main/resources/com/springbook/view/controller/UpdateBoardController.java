@@ -8,11 +8,11 @@ import com.springbook.biz.board.impl.BoardDAO;
 
 
 
-@Controller
+//@Controller
 public class UpdateBoardController {// implements Controller
 	
 
-	@RequestMapping("/updateBoard.do")
+	//@RequestMapping("/updateBoard.do")
 	public String UpdateBoard( BoardVO vo,BoardDAO boardDAO) {//handleRequest(HttpServletRequest request, HttpServletResponse response)
 	
 	

@@ -9,7 +9,7 @@ import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 
 
-@Controller
+//@Controller
 public class InsertBoardController // implements Controller 
 {
 
@@ -17,7 +17,7 @@ public class InsertBoardController // implements Controller
 	//public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 	
 	
-	@RequestMapping(value = "/insertBoard.do")	// xml에서 HandlerMapping 안에 property로 넣는 과정 어노테이션 
+	//@RequestMapping(value = "/insertBoard.do")	// xml에서 HandlerMapping 안에 property로 넣는 과정 어노테이션 
 	public String insertBoard(BoardVO vo,BoardDAO boardDAO)//insertBoard(HttpServletRequest request)
 	
 	{

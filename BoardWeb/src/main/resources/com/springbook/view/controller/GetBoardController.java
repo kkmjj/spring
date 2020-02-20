@@ -8,10 +8,10 @@ import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
 
 
-@Controller
+//@Controller
 public class GetBoardController  {//implements Controller
 
-	@RequestMapping("/getBoard.do")
+	//@RequestMapping("/getBoard.do")
 	public String getBoard(BoardVO vo , BoardDAO boardDAO, Model model) {//handleRequest(HttpServletRequest request, HttpServletResponse response)
 		
 		model.addAttribute("board",boardDAO.getBoard(vo));

@@ -1,15 +1,9 @@
 package com.springbook.view.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
@@ -18,7 +12,9 @@ import com.springbook.biz.board.impl.BoardDAO;
 public class GetBoardListController  {//implements Controller
 
 	@RequestMapping("/getBoardList.do")
-	public ModelAndView getBoardList(BoardVO vo , BoardDAO boardDAO, ModelAndView mav){ // handleRequest(HttpServletRequest request, HttpServletResponse response) 
+	public String getBoardList(@RequestParam(value = "searchCondition", defaultValue = "TITLE", required = false) String contition
+			,@RequestParam(value = "searchKeyword", defaultValue = "", required = false) String keyword, BoardVO vo,
+			BoardDAO boardDAO, Model model){ // handleRequest(HttpServletRequest request, HttpServletResponse response) 
 		//BoardVO vo = new 	BoardVO();
 	//	BoardDAO boardDAO = new BoardDAO();
 
@@ -30,9 +26,11 @@ public class GetBoardListController  {//implements Controller
 		
 		
 	//	ModelAndView mav = new ModelAndView();
-		mav.addObject("boardList", boardDAO.getBoardList(vo));
-		mav.setViewName("getBoardList.jsp");
-		return mav;
+		System.out.println(keyword);
+		System.out.println(contition);
+		model.addAttribute("boardList", boardDAO.getBoardList(vo));
+		
+		return "getBoardList.jsp";
 	}
 
 }
